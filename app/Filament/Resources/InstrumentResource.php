@@ -79,7 +79,7 @@ class InstrumentResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Descrição')
-                    ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')
                     ->searchable(),

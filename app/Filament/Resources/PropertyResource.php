@@ -29,6 +29,7 @@ class PropertyResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(6)
             ->schema([
                 static::getNameFormFields(),
                 static::getAreaFormFields(),
@@ -118,6 +119,7 @@ class PropertyResource extends Resource
     {
         return Forms\Components\TextInput::make('name')
             ->label('Descrição')
+            ->columnSpan(4)
             ->autocomplete(false)
             ->required()
             ->maxLength(255);
@@ -127,6 +129,7 @@ class PropertyResource extends Resource
     {
         return Forms\Components\TextInput::make('area')
             ->label('Área (m²)')
+            ->columnSpan(2)
             ->autocomplete(false)
             ->numeric()
             ->inputMode('decimal')
@@ -137,6 +140,7 @@ class PropertyResource extends Resource
     {
         return Forms\Components\TextInput::make('location')
             ->label('Localização')
+            ->columnSpan(4)
             ->autocomplete(false)
             ->required()
             ->maxLength(255);
@@ -146,6 +150,7 @@ class PropertyResource extends Resource
     {
         return Forms\Components\Select::make('property_type')
             ->label('Tipo de Propriedade')
+            ->columnSpan(2)
             ->required()
             ->options(PropertyTypeEnum::toSelectArray());
     }
@@ -155,6 +160,7 @@ class PropertyResource extends Resource
     {
         return Forms\Components\TextInput::make('car_code')
             ->label('Código CAR')
+            ->columnSpan(4)
             ->autocomplete(false)
             ->hint('Código do Cadastro Ambiental Rural')
             ->required()
