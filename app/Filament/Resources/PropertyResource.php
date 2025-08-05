@@ -46,34 +46,41 @@ class PropertyResource extends Resource
                 return $query->where('user_id', Auth::user()->id);
             })
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Descrição')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('area')
-                    ->numeric()
+                    ->label('Área (m²)')
+                    ->numeric('2', ',', '.')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('location')
+                    ->label('Localização')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('property_type')
+                    ->label('Tipo de Propriedade')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('car_code')
+                    ->label('Código CAR')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Ativo')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Criado em')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Atualizado em')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->label('Excluído em')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -81,11 +88,13 @@ class PropertyResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->visible(false),
                 ]),
             ]);
     }
@@ -101,7 +110,6 @@ class PropertyResource extends Resource
     {
         return [
             'index' => Pages\ListProperties::route('/'),
-            // 'create' => Pages\CreateProperty::route('/create'),
             'edit' => Pages\EditProperty::route('/{record}/edit'),
         ];
     }

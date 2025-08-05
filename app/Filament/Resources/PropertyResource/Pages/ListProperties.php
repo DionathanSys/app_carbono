@@ -17,7 +17,6 @@ class ListProperties extends ListRecords
             Actions\CreateAction::make()
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['user_id'] = Auth::user()->id;
-
                     return $data;
                 }),
         ];
