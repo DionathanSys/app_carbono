@@ -26,31 +26,50 @@ class InstrumentResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(6)
             ->schema([
-                Forms\Components\TextInput::make('property_id')
+                Forms\Components\Select::make('property_id')
                     ->label('Propriedade')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('type')
+                    ->columnSpan(4)
+                    ->relationship('property', 'name')
+                    ->required(),
+                Forms\Components\Select::make('type')
                     ->label('Tipo')
+                    ->columnSpan(2)
+                    ->options([
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('amount')
                     ->label('Quantidade')
+                    ->columnSpan(2)
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('unit')
-                    ->label('Unidade'),
+                Forms\Components\Select::make('unit')
+                    ->label('Unidade')
+                    ->columnSpan(2)
+                    ->options([
+                        'kg' => 'Quilograma',
+                        'g' => 'Grama',
+                        'l' => 'Litro',
+                        'ml' => 'Mililitro',
+                    ]),
                 Forms\Components\TextInput::make('value')
                     ->label('Valor')
+                    ->prefix('R$')
+                    ->columnSpan(2)
                     ->numeric(),
                 Forms\Components\TextInput::make('description')
                     ->label('Descrição')
+                    ->columnSpan(3)
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
                     ->label('Status')
+                    ->columnSpan(2)
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Ativo')
+                    ->inline(false)
+                    ->columnSpan(1)
                     ->required(),
             ]);
     }
