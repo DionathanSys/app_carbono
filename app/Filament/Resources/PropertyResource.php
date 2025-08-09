@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enum\PropertyTypeEnum;
 use App\Enum\TipoServicoEnum;
+use App\Enums\BiomaEnum;
 use App\Filament\Resources\PropertyResource\Pages;
 use App\Filament\Resources\PropertyResource\RelationManagers;
 use App\Models\Property;
@@ -35,6 +36,7 @@ class PropertyResource extends Resource
                 static::getAreaFormFields(),
                 static::getLocationFormFields(),
                 static::getPropertyTypeFormFields(),
+                static::getBiomaTypeFormFields(),
                 static::getCarCodeFormFields(),
                 static::getIsActiveFormFields(),
             ]);
@@ -140,7 +142,7 @@ class PropertyResource extends Resource
     {
         return Forms\Components\TextInput::make('location')
             ->label('Localização')
-            ->columnSpan(4)
+            ->columnSpanFull()
             ->autocomplete(false)
             ->required()
             ->maxLength(255);
@@ -150,9 +152,18 @@ class PropertyResource extends Resource
     {
         return Forms\Components\Select::make('property_type')
             ->label('Tipo de Propriedade')
-            ->columnSpan(2)
+            ->columnSpan(3)
             ->required()
             ->options(PropertyTypeEnum::toSelectArray());
+    }
+
+    public static function getBiomaTypeFormFields(): Forms\Components\Select
+    {
+        return Forms\Components\Select::make('bioma')
+            ->label('Tipo de Bioma')
+            ->columnSpan(3)
+            ->required()
+            ->options(BiomaEnum::toSelectArray());
     }
 
     // Cadastro Ambiental Rural
@@ -177,8 +188,4 @@ class PropertyResource extends Resource
     }
 }
 
-
-//                 Forms\Components\Toggle::make('is_active')
-//                     ->required(),
-//                 Forms\Components\TextInput::make('status'),
 

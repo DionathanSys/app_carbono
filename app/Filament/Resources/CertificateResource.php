@@ -17,13 +17,18 @@ class CertificateResource extends Resource
 {
     protected static ?string $model = Certificate::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralModelLabel = 'Certificados';
+
+    protected static ?string $pluralLabel = 'Certificados';
+
+    protected static ?string $label = 'Certificado';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('instrument_id')
+                Forms\Components\Select::make('instrument_id')
+                    ->label('Ativo')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('certificate_number')

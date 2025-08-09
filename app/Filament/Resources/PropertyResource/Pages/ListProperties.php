@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PropertyResource\Pages;
 
+use App\Enum\StatusDiversosEnum;
 use App\Filament\Resources\PropertyResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -17,6 +18,7 @@ class ListProperties extends ListRecords
             Actions\CreateAction::make()
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['user_id'] = Auth::user()->id;
+                    $data['status'] = StatusDiversosEnum::PENDENTE;
                     return $data;
                 }),
         ];
