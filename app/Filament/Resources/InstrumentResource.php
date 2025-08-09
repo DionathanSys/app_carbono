@@ -17,9 +17,9 @@ class InstrumentResource extends Resource
 {
     protected static ?string $model = Instrument::class;
 
-    protected static ?string $pluralModelLabel = 'Instrumentos';
+    protected static ?string $pluralModelLabel = 'Ativos';
 
-    protected static ?string $pluralLabel = 'Instrumentos';
+    protected static ?string $pluralLabel = 'Ativos';
 
     protected static ?string $label = 'Instrumento';
 
@@ -48,10 +48,8 @@ class InstrumentResource extends Resource
                     ->label('Unidade')
                     ->columnSpan(2)
                     ->options([
-                        'kg' => 'Quilograma',
-                        'g' => 'Grama',
-                        'l' => 'Litro',
-                        'ml' => 'Mililitro',
+                        'm²' => 'Metros Quadrados',
+                        'ha' => 'Hectares',
                     ]),
                 Forms\Components\TextInput::make('value')
                     ->label('Valor')
