@@ -2,14 +2,17 @@
 
 namespace App\Filament\Resources\PropertyResource\RelationManagers;
 
+use App\Enum\StatusDiversosEnum;
 use App\Filament\Resources\InstrumentResource;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class InstrumentsRelationManager extends RelationManager
 {
@@ -80,7 +83,15 @@ class InstrumentsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->label('Ativo')
+                    ->icon('heroicon-o-plus')
+                    ->modalWidth(MaxWidth::FiveExtraLarge)
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['user_id'] = Auth::id();
+                        $data['status'] = StatusDiversosEnum::PENDENTE;
+                        return $data;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
