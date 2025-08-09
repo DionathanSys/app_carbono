@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enum\PropertyTypeEnum;
 use App\Enum\TipoServicoEnum;
-use App\Enums\BiomaEnum;
+use App\Enum\BiomaEnum;
 use App\Filament\Resources\PropertyResource\Pages;
 use App\Filament\Resources\PropertyResource\RelationManagers;
 use App\Models\Property;
