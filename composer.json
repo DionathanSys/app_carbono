@@ -12,6 +12,7 @@
         "laravel/pulse": "^1.4",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
+        "leandrocfe/filament-ptbr-form-fields": "^3.2",
         "opcodesio/log-viewer": "^3.17"
     },
     "require-dev": {

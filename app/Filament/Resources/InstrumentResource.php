@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Leandrocfe\FilamentPtbrFormFields;
 
 class InstrumentResource extends Resource
 {
@@ -144,13 +145,12 @@ class InstrumentResource extends Resource
             ->native(false);
     }
 
-    public static function getAmountFormFields(): Forms\Components\TextInput
+    public static function getAmountFormFields(): FilamentPtbrFormFields\Money
     {
-        return Forms\Components\TextInput::make('amount')
+        return FilamentPtbrFormFields\Money::make('amount')
             ->label('Quantidade')
+            ->prefix(null)
             ->columnSpan(2)
-            ->autocomplete(false)
-            ->numeric()
             ->required();
     }
 
@@ -167,14 +167,11 @@ class InstrumentResource extends Resource
             ->native(false);
     }
 
-    public static function getValueFormFields(): Forms\Components\TextInput
+    public static function getValueFormFields(): FilamentPtbrFormFields\Money
     {
-        return Forms\Components\TextInput::make('value')
+        return FilamentPtbrFormFields\Money::make('value')
             ->label('Valor')
-            ->prefix('R$')
             ->columnSpan(2)
-            ->autocomplete(false)
-            ->numeric()
             ->required();
     }
 
