@@ -44,7 +44,7 @@ class PropertyResource extends Resource
     {
         return $table
             ->modifyQueryUsing(function (Builder $query): Builder {
-                return $query->where('user_id', Auth::user()->id);
+                return $query->owner();
             })
             ->columns([
                 Tables\Columns\TextColumn::make('name')
