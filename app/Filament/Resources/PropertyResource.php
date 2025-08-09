@@ -21,6 +21,8 @@ class PropertyResource extends Resource
 {
     protected static ?string $model = Property::class;
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $pluralModelLabel = 'Propriedades';
 
     protected static ?string $pluralLabel = 'Propriedades';
@@ -59,8 +61,8 @@ class PropertyResource extends Resource
                 Tables\Columns\TextColumn::make('location')
                     ->label('Localização')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('property_type')
-                    ->label('Tipo de Propriedade')
+                Tables\Columns\TextColumn::make('bioma')
+                    ->label('Tipo de Bioma')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('car_code')
                     ->label('Código CAR')
@@ -152,16 +154,17 @@ class PropertyResource extends Resource
     {
         return Forms\Components\Select::make('property_type')
             ->label('Tipo de Propriedade')
-            ->columnSpan(3)
+            ->columnSpan(2)
             ->required()
-            ->options(PropertyTypeEnum::toSelectArray());
+            ->options(PropertyTypeEnum::toSelectArray())
+            ->default(PropertyTypeEnum::RURAL);
     }
 
     public static function getBiomaTypeFormFields(): Forms\Components\Select
     {
         return Forms\Components\Select::make('bioma')
             ->label('Tipo de Bioma')
-            ->columnSpan(3)
+            ->columnSpan(2)
             ->required()
             ->options(BiomaEnum::toSelectArray());
     }
@@ -171,7 +174,7 @@ class PropertyResource extends Resource
     {
         return Forms\Components\TextInput::make('car_code')
             ->label('Código CAR')
-            ->columnSpan(4)
+            ->columnSpan(2)
             ->autocomplete(false)
             ->hint('Código do Cadastro Ambiental Rural')
             ->required()

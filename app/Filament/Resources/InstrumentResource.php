@@ -17,6 +17,8 @@ class InstrumentResource extends Resource
 {
     protected static ?string $model = Instrument::class;
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $pluralModelLabel = 'Ativos';
 
     protected static ?string $pluralLabel = 'Ativos';
