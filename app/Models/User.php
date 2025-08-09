@@ -47,11 +47,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function scopeOwner($query)
-    {
-        return $query->where('id', Auth::user()->id);
-    }
-
     public function properties()
     {
         return $this->hasMany(Property::class);
