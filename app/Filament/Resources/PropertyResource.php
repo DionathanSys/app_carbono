@@ -176,7 +176,7 @@ class PropertyResource extends Resource
             ->label('Código CAR')
             ->columnSpan(2)
             ->autocomplete(false)
-            ->hint('Código do Cadastro Ambiental Rural')
+            ->helperText('Código Cadastro Ambiental Rural')
             ->required()
             ->maxLength(255);
     }
