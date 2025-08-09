@@ -7,7 +7,11 @@ use App\Enum\TipoServicoEnum;
 use App\Enum\BiomaEnum;
 use App\Filament\Resources\PropertyResource\Pages;
 use App\Filament\Resources\PropertyResource\RelationManagers;
+use App\Filament\Resources\PropertyResource\RelationManagers\CertificatesRelationManager;
+use App\Filament\Resources\PropertyResource\RelationManagers\DocumentsRelationManager;
+use App\Filament\Resources\PropertyResource\RelationManagers\InstrumentsRelationManager;
 use App\Models\Property;
+use Dom\Document;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -107,7 +111,9 @@ class PropertyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            InstrumentsRelationManager::class,
+            DocumentsRelationManager::class,
+            CertificatesRelationManager::class,
         ];
     }
 
