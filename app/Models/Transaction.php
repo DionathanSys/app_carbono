@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use App\Enum\StatusDiversosEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasManyThrough, MorphMany};
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class Transaction extends Model
 {
     protected $casts = [
+        'value' => MoneyCast::class,
         'status' => StatusDiversosEnum::class
     ];
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use App\Enum\InstrumentTypeEnum;
 use App\Enum\StatusDiversosEnum;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ class Instrument extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'value'     => MoneyCast::class,
         'type'      => InstrumentTypeEnum::class,
         'status'    => StatusDiversosEnum::class,
     ];
