@@ -33,12 +33,12 @@ class InstrumentResource extends Resource
         return $form
             ->columns(8)
             ->schema([
-                static::getDescriptionFormFields(),
                 static::getPropertyIdFormFields(),
                 static::getTypeInstrumentFormFields(),
                 static::getAmountFormFields(),
                 static::getUnitFormFields(),
                 static::getValueFormFields(),
+                static::getDescriptionFormFields(),
                 static::getIsActiveFormFields(),
             ]);
     }
@@ -139,7 +139,7 @@ class InstrumentResource extends Resource
     {
         return Forms\Components\Select::make('type')
             ->label('Tipo')
-            ->columnSpan(2)
+            ->columnSpan(4)
             ->options(InstrumentTypeEnum::toSelectArray())
             ->required()
             ->native(false);
