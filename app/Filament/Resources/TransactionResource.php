@@ -18,7 +18,7 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $pluralModelLabel = 'Transações';
 

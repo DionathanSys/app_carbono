@@ -18,6 +18,8 @@ class InstrumentsRelationManager extends RelationManager
 {
     protected static string $relationship = 'instruments';
 
+    protected static ?string $title = 'Ativos';
+
     public function form(Form $form): Form
     {
         return $form

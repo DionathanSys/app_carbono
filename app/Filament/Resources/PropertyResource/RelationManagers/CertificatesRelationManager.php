@@ -14,6 +14,8 @@ class CertificatesRelationManager extends RelationManager
 {
     protected static string $relationship = 'certificates';
 
+    protected static ?string $title = 'Certificados';
+
     public function form(Form $form): Form
     {
         return $form

@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->registration()
+            // ->brandName('APP Carbono')
+            // ->brandLogo(asset('logo.png'))
             ->passwordReset()
             ->emailVerification()
             ->profile(isSimple: false)

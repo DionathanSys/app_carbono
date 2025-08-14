@@ -6,21 +6,24 @@ use App\Enum\BiomaEnum;
 use App\Enum\InstrumentTypeEnum;
 use App\Enum\StatusDiversosEnum;
 use App\Models\Instrument;
+use App\Services\Offer\OfferFacade;
 use Filament\Pages\Page;
 use Filament\Tables;
+use Filament\Forms;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
+use Leandrocfe\FilamentPtbrFormFields\Money;
 
 class MarketInstruments extends Page implements HasTable
 {
     use InteractsWithTable;
 
-    // protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
     protected static ?string $navigationLabel = 'Ativos à venda';
-    // protected static ?string $navigationGroup = 'Mercado';
-    protected static ?int $navigationSort = 30;
+
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $title = '';
 
@@ -82,7 +85,34 @@ class MarketInstruments extends Page implements HasTable
                     })
             ])
             ->actions([
-                // Sem ações de edição; é apenas uma vitrine
+                Tables\Actions\Action::make('Proposta')
+                    ->icon('heroicon-o-document-currency-dollar')
+                    ->iconButton()
+                    ->tooltip('Nova Proposta')
+                    ->fillForm(fn(Instrument $record) => [
+                        'amount' => $record->amount,
+                        'value'  => $record->value,
+                    ])
+                    ->form(function (Forms\Form $form, Instrument $record) {
+                        return $form
+                            ->columns(4)
+                            ->schema([
+                                Forms\Components\TextInput::make('amount')
+                                    ->label('Quantidade')
+                                    ->columnSpan(2)
+                                    ->prefix($record->unit)
+                                    ->required()
+                                    ->maxValue($record->amount)
+                                    ->minValue(0.01),
+                                Money::make('value')
+                                    ->label('Valor')
+                                    ->columnSpan(2)
+                                    ->required()
+                                    ->minValue(0.01),
+                            ]);
+                    })
+                    ->modalWidth(MaxWidth::Small)
+                    ->action(fn (Instrument $record, array $data) => OfferFacade::create($record, $data))
             ])
             ->bulkActions([])
             ->emptyStateHeading('Nenhum instrumento disponível')
